@@ -1,5 +1,8 @@
 import { Box, Button, Heading } from '@chakra-ui/react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ConversationItem from './ConversationItem';
+import Receive from './Receive';
+import Header from './Header';
 
 const Top = () => {
   const conversations = [
@@ -22,15 +25,32 @@ const Top = () => {
       <Heading mt="2vh" size="2xl">
         History
       </Heading>
-      {conversations.map(conversation => (
-        <ConversationItem
-          ml="50vw"
-          key={conversation.id}
-          userIcon={conversation.userIcon}
-          username={conversation.username}
-          message={conversation.message}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              {conversations.map(conversation => (
+                <ConversationItem
+                  ml="50vw"
+                  key={conversation.id}
+                  userIcon={conversation.userIcon}
+                  username={conversation.username}
+                  message={conversation.message}
+                />
+              ))}
+            </>
+          }
         />
-      ))}
+        <Route
+          path="/receive"
+          element={
+            <>
+              <Receive />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 };

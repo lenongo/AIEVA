@@ -22,7 +22,7 @@ const EllipsisButton = ({ text, ...props }) => {
       whiteSpace="nowrap"
       overflow="hidden"
       onClick={walletConnect}
-      ml="50vw"
+      ml="70vw"
       mt="1vh"
       maxH="5vh"
     >

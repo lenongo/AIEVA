@@ -4,10 +4,6 @@ import { ethers } from 'ethers';
 import { useState } from 'react';
 
 // Import just a few select items
-import { BrowserProvider, parseUnits } from 'ethers';
-
-// Import from a specific export
-import { HDNodeWallet } from 'ethers/wallet';
 import EllipsisButton from './EllipsisButton';
 
 const Header = () => {
