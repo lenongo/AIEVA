@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Heading } from '@chakra-ui/react';
 import ConversationItem from './ConversationItem';
 
 const Top = () => {
@@ -19,6 +19,9 @@ const Top = () => {
   ];
   return (
     <div>
+      <Heading mt="2vh" size="2xl">
+        History
+      </Heading>
       {conversations.map(conversation => (
         <ConversationItem
           ml="50vw"

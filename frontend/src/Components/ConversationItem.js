@@ -6,7 +6,7 @@ const ConversationItem = ({ userIcon, username, message }) => {
       display="flex"
       alignItems="center"
       marginBottom="1rem"
-      ml="10vw"
+      ml="5vw"
       mt="3vh"
     >
       <Avatar src={userIcon} name={username} marginRight="1rem" />
