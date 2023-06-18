@@ -1,0 +1,19 @@
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "description": "A demo of GitHub Actions",
+  "main": "hello_world.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.31.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^19.0.13",
+    "dotenv": "^16.3.1"
+  }
+}
