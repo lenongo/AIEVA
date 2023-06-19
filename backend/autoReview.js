@@ -22,7 +22,7 @@ async function autoReview(pullRequestData) {
     name: pullRequestData.user.login,
     // icon は https://github.com/:user_id.png
     icon: `https:///github.com/${pullRequestData.user.login}.png`,
-    message: pullRequestData.message,
+    message: pullRequestData.body,
     // 'code': pullRequestData.code,
     reply: `AI Reply: Reviewed pull request from ${pullRequestData.user.login}`, // ダミーのAIリプライ
     accuracy: temporaryAccuracy,
