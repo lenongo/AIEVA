@@ -1,14 +1,14 @@
 // ダミーのレビュー結果を返す関数
 async function autoReview(pullRequestData) {
   const temporaryAccuracy = {
-    Comprehensiveness: Math.random() * 10,
-    "Code Quality": Math.random() * 10,
-    Testing: Math.random() * 10,
-    Documentation: Math.random() * 10,
-    Performance: Math.random() * 10,
-    Security: Math.random() * 10,
-    "Error Handling": Math.random() * 10,
-    "Size of the Pull Request": Math.random() * 10,
+    Comprehensiveness: Math.floor(Math.random() * 10) + 1,
+    CodeQuality: Math.floor(Math.random() * 10) + 1,
+    Testing: Math.floor(Math.random() * 10) + 1,
+    Documentation: Math.floor(Math.random() * 10) + 1,
+    Performance: Math.floor(Math.random() * 10) + 1,
+    Security: Math.floor(Math.random() * 10) + 1,
+    ErrorHandling: Math.floor(Math.random() * 10) + 1,
+    Size: Math.floor(Math.random() * 10) + 1,
   };
 
   // 平均精度の計算
