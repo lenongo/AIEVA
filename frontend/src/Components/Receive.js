@@ -1,8 +1,10 @@
 import { Box, Text, Avatar, Button, Image } from '@chakra-ui/react';
+import { useState } from 'react';
 import reject from './reject.png';
 import approve from './approve.png';
 import usdc from './usdc.png';
-import { ethers } from 'ethers';
+import abi from './abi.json';
+import { ethers, Contract, parseUnits } from 'ethers';
 
 const Receive = ({ userIcon, username, coin }) => {
   console.log('MetaMask not installed; using read-only defaults');
@@ -10,8 +12,69 @@ const Receive = ({ userIcon, username, coin }) => {
   let signer;
 
   const sendCrypto = async () => {
-    //USDCの送付
+    //ASTARの送付
+    const contractAddress = '0x9aB358F76831a3Fc47F6b232eB18d16Bd665df0d';
     console.log('sendCrypto');
+    if (window.ethereum == null) {
+      // If MetaMask is not installed, we use the default provider,
+      // which is backed by a variety of third-party services (such
+      // as INFURA). They do not have private keys installed so are
+      // only have read-only access
+      console.log('MetaMask not installed; using read-only defaults');
+      provider = ethers.getDefaultProvider();
+    } else {
+      // Connect to the MetaMask EIP-1193 object. This is a standard
+      // protocol that allows Ethers access to make all read-only
+      // requests through MetaMask.
+      provider = new ethers.BrowserProvider(window.ethereum);
+
+      // It also provides an opportunity to request access to write
+      // operations, which will be performed by the private key
+      // that MetaMask manages for the user.
+      signer = await provider.getSigner();
+      console.log('provider', 'provider');
+      const contract = new Contract(contractAddress, abi, signer);
+      console.log('contract', 'create Contract');
+      const amount = parseUnits('1.0', 18);
+      const tx = await contract.deposit({
+        value: amount,
+      });
+      console.log('tx', tx);
+      console.log('Deposit function called successfully!');
+    }
+  };
+
+  const receiveCrypto = async () => {
+    //ASTARの送付
+    const contractAddress = '0x9aB358F76831a3Fc47F6b232eB18d16Bd665df0d';
+    console.log('sendCrypto');
+    if (window.ethereum == null) {
+      // If MetaMask is not installed, we use the default provider,
+      // which is backed by a variety of third-party services (such
+      // as INFURA). They do not have private keys installed so are
+      // only have read-only access
+      console.log('MetaMask not installed; using read-only defaults');
+      provider = ethers.getDefaultProvider();
+    } else {
+      // Connect to the MetaMask EIP-1193 object. This is a standard
+      // protocol that allows Ethers access to make all read-only
+      // requests through MetaMask.
+      provider = new ethers.BrowserProvider(window.ethereum);
+
+      // It also provides an opportunity to request access to write
+      // operations, which will be performed by the private key
+      // that MetaMask manages for the user.
+      signer = await provider.getSigner();
+      console.log('provider', 'provider');
+      const contract = new Contract(contractAddress, abi, signer);
+      console.log('contract', 'create Contract');
+      const amount = parseUnits('1.0', 18);
+      const tx = await contract.deposit({
+        value: amount,
+      });
+      console.log('tx', tx);
+      console.log('Deposit function called successfully!');
+    }
   };
 
   const signWallet = async () => {

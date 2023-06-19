@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 // Import just a few select items
 import EllipsisButton from './EllipsisButton';
-import ai from './ai.png';
+import ai from './daologo.png';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -48,7 +48,14 @@ const Header = () => {
   return (
     <Box color="white" width="100%" height="7vh" pt="2vh">
       <Flex>
-        <Image ml="5px" src={ai} alt="aiEva" />
+        <Image
+          position={'relative'}
+          top="-30"
+          ml="5px"
+          src={ai}
+          width={'120px'}
+          alt="aiEva"
+        />
         <Text
           ml="20vw"
           mt={'5px'}
@@ -57,7 +64,17 @@ const Header = () => {
           fontWeight="bold"
           _hover={{ color: '#000000' }}
         >
-          <Link to="/"> Pull request</Link>
+          <Link to="/"> Your Team</Link>
+        </Text>
+        <Text
+          ml="5vw"
+          mt={'5px'}
+          color="#1B7CB7"
+          fontFamily="body"
+          fontWeight="bold"
+          _hover={{ color: '#000000' }}
+        >
+          <Link to="/register"> Register Task</Link>
         </Text>
 
         <Text
@@ -80,6 +97,7 @@ const Header = () => {
         >
           <Link to="/receive"> Recieve ASTR</Link>
         </Text>
+
         <EllipsisButton
           walletConnect={walletConnect}
           text={isConnected ? walletAddress : 'Wallet Connect'}

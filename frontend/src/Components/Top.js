@@ -1,9 +1,10 @@
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, Center } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ConversationItem from './ConversationItem';
 import Receive from './Receive';
 import Header from './Header';
 import Receipt from './Receipt';
+import Register from './register';
 
 const Top = () => {
   const conversations = [
@@ -66,7 +67,7 @@ const Top = () => {
                   ml="5vw"
                   mt={'3vh'}
                 >
-                  Pull request
+                  Your Team Work
                 </Text>
                 {conversations.map(conversation => (
                   <ConversationItem
@@ -79,6 +80,18 @@ const Top = () => {
                     time={conversation.time}
                   />
                 ))}
+                <Center display="flex" width="100%" alignItems="center">
+                  <Button
+                    width="340px"
+                    mt="50px"
+                    height="50px"
+                    bg={'#1B7CB7'}
+                    color={'#FFFFFF'}
+                    _hover={'#000000'}
+                  >
+                    Invite Team Member
+                  </Button>
+                </Center>
               </>
             }
           />
@@ -135,6 +148,24 @@ const Top = () => {
                     time={history.time}
                   />
                 ))}
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <Text
+                  pt="2vh"
+                  fontSize="24px"
+                  fontFamily={'body'}
+                  fontWeight="bold"
+                  ml="5vw"
+                  mt={'3vh'}
+                >
+                  Register Tasks
+                </Text>
+                <Register />
               </>
             }
           />
