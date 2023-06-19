@@ -1,9 +1,15 @@
-import { Box, Text, Avatar, Button, Image } from '@chakra-ui/react';
+import { Box, Text, Avatar, Button, Link, Image } from '@chakra-ui/react';
 import reject from './reject.png';
+import { useNavigate } from 'react-router-dom';
 import approve from './approve.png';
-import usdc from './usdc.png';
+import astr from './astr.png';
 
 const Receipt = ({ userIcon, username, coin, approval, time }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/receipt/1');
+  };
+
   return (
     <>
       <Box>
@@ -16,6 +22,7 @@ const Receipt = ({ userIcon, username, coin, approval, time }) => {
           borderRadius="16px"
           ml="5vw"
           mt="3vh"
+          onClick={handleClick}
           bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
         >
           <Avatar
@@ -29,10 +36,16 @@ const Receipt = ({ userIcon, username, coin, approval, time }) => {
           <Box position={'relative'} top={'-39'} width="240px">
             <Text fontWeight="bold"> {username}</Text>
           </Box>
-          <Image position={'relative'} top={'-39'} src={usdc} mr="2px" />
+          <Image
+            position={'relative'}
+            top={'-39'}
+            src={astr}
+            height={'30px'}
+            mr="2px"
+          />
           <Box position={'relative'} top={'-39'} width="145px">
             <Text color="#20A14C" fontWeight="bold">
-              USDC
+              ASTR
             </Text>
           </Box>
           <Box position={'relative'} top={'-39'} width="145px">

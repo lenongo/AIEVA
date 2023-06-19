@@ -5,6 +5,7 @@ import Receive from './Receive';
 import Header from './Header';
 import Receipt from './Receipt';
 import Register from './register';
+import Detail from './Detail';
 
 const Top = () => {
   const conversations = [
@@ -148,6 +149,25 @@ const Top = () => {
                     time={history.time}
                   />
                 ))}
+              </>
+            }
+          />
+
+          <Route
+            path="/receipt/:id"
+            element={
+              <>
+                <Text
+                  pt="2vh"
+                  fontSize="24px"
+                  fontFamily={'body'}
+                  fontWeight="bold"
+                  ml="5vw"
+                  mt={'3vh'}
+                >
+                  Review of AI
+                </Text>
+                <Detail />
               </>
             }
           />
