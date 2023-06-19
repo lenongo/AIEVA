@@ -7,7 +7,6 @@ import abi from './abi.json';
 import { ethers, Contract, parseUnits } from 'ethers';
 
 const Receive = ({ userIcon, username, coin }) => {
-  console.log('MetaMask not installed; using read-only defaults');
   let provider;
   let signer;
 
@@ -104,7 +103,7 @@ const Receive = ({ userIcon, username, coin }) => {
           'You recieved 100 USDC from DAO Workers'
         );
         signMessage.then(result => {
-          sendCrypto();
+          receiveCrypto();
           console.log(result);
         }); // データを表示または利用する
       } catch (error) {
