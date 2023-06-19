@@ -1,66 +1,104 @@
-import { Box, Text, Avatar, Button } from '@chakra-ui/react';
+import { Box, Text, Avatar, Button, Image } from '@chakra-ui/react';
+import reject from './reject.png';
+import approve from './approve.png';
+import usdc from './usdc.png';
+import { ethers } from 'ethers';
 
-const Receive = () => {
+const Receive = ({ userIcon, username, coin }) => {
+  console.log('MetaMask not installed; using read-only defaults');
+  let provider;
+  let signer;
+
+  const sendCrypto = async () => {
+    //USDCの送付
+    console.log('sendCrypto');
+  };
+
+  const signWallet = async () => {
+    console.log('Wallet Connect');
+
+    if (window.ethereum == null) {
+      // If MetaMask is not installed, we use the default provider,
+      // which is backed by a variety of third-party services (such
+      // as INFURA). They do not have private keys installed so are
+      // only have read-only access
+      console.log('MetaMask not installed; using read-only defaults');
+      provider = ethers.getDefaultProvider();
+    } else {
+      // Connect to the MetaMask EIP-1193 object. This is a standard
+      // protocol that allows Ethers access to make all read-only
+      // requests through MetaMask.
+      provider = new ethers.BrowserProvider(window.ethereum);
+
+      // It also provides an opportunity to request access to write
+      // operations, which will be performed by the private key
+      // that MetaMask manages for the user.
+      signer = await provider.getSigner();
+
+      console.log('MetaMask installed; using provider', signer.getAddress());
+      try {
+        const signMessage = signer.signMessage(
+          'You recieved 100 USDC from DAO Workers'
+        );
+        signMessage.then(result => {
+          sendCrypto();
+          console.log(result);
+        }); // データを表示または利用する
+      } catch (error) {
+        console.log(error); // エラーハンドリング
+      }
+    }
+  };
+
   return (
     <>
-      <Box
-        display="flex"
-        alignItems="center"
-        marginBottom="1rem"
-        ml="5vw"
-        mt="3vh"
-      >
-        <Text fontWeight="bold" mr="2vw">
-          {'Icon'}
-        </Text>
-
-        <Text fontWeight="bold" mr="2vw">
-          {'Your Name'}
-        </Text>
-        <Text fontWeight="bold">{'Your Task'}</Text>
-        <Text ml="70px" fontWeight="bold">
-          {'Progress rate'}
-        </Text>
-
-        <Text ml="5vw" fontWeight="bold">
-          Claim Button
-        </Text>
-      </Box>
-      <Box
-        display="flex"
-        alignItems="center"
-        marginBottom="1rem"
-        ml="5vw"
-        mt="3vh"
-      >
-        <Avatar src={'user'} name={'username'} marginRight="1rem" />
-
-        <Text fontWeight="bold" mr="2vw">
-          {'ShunFunaki'}
-        </Text>
-        <Text>{'Create AITuber'}</Text>
-        <Text ml="2vw">{'100%'}</Text>
-
-        <Button ml="10vw">Accept & Claim this Task</Button>
-      </Box>
-      <Box
-        display="flex"
-        alignItems="center"
-        marginBottom="1rem"
-        ml="5vw"
-        mt="3vh"
-      >
-        <Avatar src={'user'} name={'username'} marginRight="1rem" />
-
-        <Text fontWeight="bold" mr="2vw">
-          {'ShunFunaki'}
-        </Text>
-        <Text>{'Create AITuber'}</Text>
-        <Text ml="2vw" mr="10px">
-          {'10%'}
-        </Text>
-
-        <Button ml="10vw">Accept & Claim this Task</Button>
+      <Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          marginBottom="1rem"
+          width="840px"
+          height="180px"
+          borderRadius="16px"
+          ml="5vw"
+          mt="3vh"
+          bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
+        >
+          <Avatar
+            position={'relative'}
+            top={'-39'}
+            ml="30px"
+            src={userIcon}
+            name={username}
+            marginRight="1rem"
+          />
+          <Box position={'relative'} top={'-39'} width="240px">
+            <Text fontWeight="bold"> {username}</Text>
+          </Box>
+          <Image position={'relative'} top={'-39'} src={usdc} mr="2px" />
+          <Box position={'relative'} top={'-39'} width="145px">
+            <Text color="#000000" fontWeight="bold">
+              USDC
+            </Text>
+          </Box>
+          <Box position={'relative'} top={'-39'} width="145px">
+            <Text color="#000000" fontWeight="bold">
+              {coin}
+            </Text>
+          </Box>
+        </Box>
+        <Box position="relative" ml={'720px'} top={'-100'} fontSize="18px">
+          <Button
+            width="100px"
+            borderRadius={'10px'}
+            bg={'#1B7CB7'}
+            color={'#FFFFFF'}
+            _hover={'#000000'}
+            onClick={signWallet}
+          >
+            Sign
+          </Button>
+        </Box>
       </Box>
     </>
   );

@@ -4,12 +4,13 @@ import * as ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import theme from './theme';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
-  <StrictMode>
+  <StrictMode theme={theme}>
     <ColorModeScript />
     <App />
   </StrictMode>

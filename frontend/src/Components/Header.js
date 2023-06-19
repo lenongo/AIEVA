@@ -1,10 +1,12 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Image, Text, Flex } from '@chakra-ui/react';
 // Import everything
 import { ethers } from 'ethers';
 import { useState } from 'react';
 
 // Import just a few select items
 import EllipsisButton from './EllipsisButton';
+import ai from './ai.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -44,19 +46,45 @@ const Header = () => {
   };
 
   return (
-    <Box
-      bg="cyan.500"
-      color="white"
-      width="100%"
-      height="7vh"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      {/* ヘッダーのコンテンツを追加 */}
-      <EllipsisButton
-        walletConnect={walletConnect}
-        text={isConnected ? walletAddress : 'Wallet Connect'}
-      />
+    <Box color="white" width="100%" height="7vh" pt="2vh">
+      <Flex>
+        <Image ml="5px" src={ai} alt="aiEva" />
+        <Text
+          ml="20vw"
+          mt={'5px'}
+          color="#1B7CB7"
+          fontFamily="body"
+          fontWeight="bold"
+          _hover={{ color: '#000000' }}
+        >
+          <Link to="/"> Pull request</Link>
+        </Text>
+
+        <Text
+          ml="5vw"
+          mt={'5px'}
+          color="#1B7CB7"
+          fontFamily="body"
+          fontWeight="bold"
+          _hover={{ color: '#000000' }}
+        >
+          <Link to="/receipt">Receipt of ASTR</Link>
+        </Text>
+        <Text
+          ml="5vw"
+          mt={'5px'}
+          color="#1B7CB7"
+          fontFamily="body"
+          fontWeight="bold"
+          _hover={{ color: '#000000' }}
+        >
+          <Link to="/receive"> Recieve ASTR</Link>
+        </Text>
+        <EllipsisButton
+          walletConnect={walletConnect}
+          text={isConnected ? walletAddress : 'Wallet Connect'}
+        />
+      </Flex>
     </Box>
   );
 };

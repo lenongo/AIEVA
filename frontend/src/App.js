@@ -22,8 +22,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Box textAlign="center" fontSize="xl">
-          <Header />
-          <SplitScreen leftPanel={<Sidebar />} rightPanel={<Top />} />
+          <Top />
         </Box>
       </BrowserRouter>
     </ChakraProvider>
