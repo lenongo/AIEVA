@@ -1,4 +1,4 @@
-import { Box, Avatar, Text, Button, Image } from '@chakra-ui/react';
+import { Box, Avatar, Text, Button, Image, Center } from '@chakra-ui/react';
 import reject from './reject.png';
 import approve from './approve.png';
 

@@ -15,6 +15,9 @@ const EllipsisButton = ({ text, ...props }) => {
       whiteSpace="nowrap"
       overflow="hidden"
       onClick={walletConnect}
+      bg={'#1B7CB7'}
+      color={'#FFFFFF'}
+      _hover={'#000000'}
     >
       {truncatedText}
     </Button>

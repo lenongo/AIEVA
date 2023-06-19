@@ -4,38 +4,33 @@ import {
   Avatar,
   Button,
   Image,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Select,
+  Center,
+  Input,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import reject from './reject.png';
 import approve from './approve.png';
-import astr from './astr.png';
+import usdc from './usdc.png';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import abi from './abi.json';
 import { ethers, Contract, parseUnits } from 'ethers';
 
-const Receive = ({ userIcon, username, coin }) => {
+const Register = () => {
+  const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
   let provider;
   let signer;
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
+  const handleButtonClick = () => {
+    navigate('/'); // 遷移先のパスを指定
   };
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-
-  const receiveCrypto = async () => {
+  const depositCrypto = async () => {
     //ASTARの送付
     const contractAddress = '0x9aB358F76831a3Fc47F6b232eB18d16Bd665df0d';
-    console.log('sendCrypto');
+    console.log('deposit');
     if (window.ethereum == null) {
       // If MetaMask is not installed, we use the default provider,
       // which is backed by a variety of third-party services (such
@@ -56,13 +51,16 @@ const Receive = ({ userIcon, username, coin }) => {
       console.log('provider', 'provider');
       const contract = new Contract(contractAddress, abi, signer);
       console.log('contract', 'create Contract');
-      const amount = parseUnits('1.0', 18);
-      const tx = await contract.withdraw(0).then(handleOpenModal);
+      const amount = parseUnits(inputValue, 18);
+      const tx = await contract
+        .deposit({
+          value: amount,
+        })
+        .then(handleButtonClick);
       console.log('tx', tx);
       console.log('Deposit function called successfully!');
     }
   };
-
   const signWallet = async () => {
     console.log('Wallet Connect');
 
@@ -87,10 +85,10 @@ const Receive = ({ userIcon, username, coin }) => {
       console.log('MetaMask installed; using provider', signer.getAddress());
       try {
         const signMessage = signer.signMessage(
-          'You recieved ' + { coin } + ' ASTR from DAO Workers'
+          'You create new task which is ' + inputValue + ' ASTAR'
         );
         signMessage.then(result => {
-          receiveCrypto();
+          depositCrypto();
           console.log(result);
         }); // データを表示または利用する
       } catch (error) {
@@ -102,76 +100,105 @@ const Receive = ({ userIcon, username, coin }) => {
   return (
     <>
       <Box>
-        <Box
+        <Text
+          fontSize="2xl"
+          borderRadius="16px"
+          ml="5vw"
+          mt="20px"
+          fontWeight="bold"
+        >
+          ⚒Who assign
+        </Text>
+        <Select
           display="flex"
           alignItems="center"
           marginBottom="1rem"
           width="840px"
-          height="180px"
+          height="70px"
           borderRadius="16px"
+          fontFamily={'heading'}
           ml="5vw"
           mt="3vh"
+          size="lg"
           bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
         >
-          <Avatar
-            position={'relative'}
-            top={'-39'}
-            ml="30px"
-            src={userIcon}
-            name={username}
-            marginRight="1rem"
-          />
-          <Box position={'relative'} top={'-39'} width="240px">
-            <Text fontWeight="bold"> {username}</Text>
-          </Box>
-          <Image
-            position={'relative'}
-            top={'-39'}
-            src={astr}
-            mr="2px"
-            height={'30px'}
-          />
-          <Box position={'relative'} top={'-39'} width="145px">
-            <Text color="#000000" fontWeight="bold">
-              ASTR
-            </Text>
-          </Box>
-          <Box position={'relative'} top={'-39'} width="145px">
-            <Text color="#000000" fontWeight="bold">
-              {coin}
-            </Text>
-          </Box>
-        </Box>
-        <Box position="relative" ml={'720px'} top={'-100'} fontSize="18px">
-          <Button
-            width="100px"
-            borderRadius={'10px'}
-            bg={'#1B7CB7'}
-            color={'#FFFFFF'}
-            _hover={'#000000'}
-            onClick={signWallet}
-          >
-            Sign
-          </Button>
-        </Box>
+          <option fontWeight="bold" fontSize="40px" value="option1">
+            Shun Funaki
+          </option>
+          <option fontWeight="bold" value="option2">
+            Haruki Nishio
+          </option>
+          <option fontWeight="bold" value="option3">
+            Kakeru Hirayama
+          </option>
+        </Select>
       </Box>
-      <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Receipt Crypto</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <p>You can receipt crypto, Nice Work🏳‍🌈</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button variant="ghost" onClick={handleCloseModal}>
-              閉じる
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+
+      <Box>
+        <Text
+          fontSize="2xl"
+          borderRadius="16px"
+          ml="5vw"
+          mt="20px"
+          fontWeight="bold"
+        >
+          💻Where is your blanch?
+        </Text>
+        <Input
+          display="flex"
+          alignItems="center"
+          marginBottom="1rem"
+          width="840px"
+          height="70px"
+          borderRadius="16px"
+          fontFamily={'heading'}
+          ml="5vw"
+          mt="3vh"
+          size="lg"
+          bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
+        ></Input>
+      </Box>
+      <Box>
+        <Text
+          fontSize="2xl"
+          borderRadius="16px"
+          ml="5vw"
+          mt="20px"
+          fontWeight="bold"
+        >
+          💰How much is this job?
+        </Text>
+        <Input
+          display="flex"
+          alignItems="center"
+          marginBottom="1rem"
+          width="840px"
+          height="70px"
+          borderRadius="16px"
+          fontFamily={'heading'}
+          ml="5vw"
+          mt="3vh"
+          size="lg"
+          value={inputValue}
+          onChange={e => setInputValue(e.target.value)}
+          bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
+        ></Input>
+      </Box>
+      <Center display="flex" width="100%" alignItems="center">
+        <Button
+          width="340px"
+          mt="50px"
+          height="50px"
+          bg={'#1B7CB7'}
+          color={'#FFFFFF'}
+          _hover={'#000000'}
+          onClick={signWallet}
+        >
+          Create a job!
+        </Button>
+      </Center>
     </>
   );
 };
 
-export default Receive;
+export default Register;
