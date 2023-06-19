@@ -23,7 +23,7 @@ async function reviewAndSend(pullRequestData) {
 
 async function processPullRequests() {
   const pullRequestDatas = await getNewPullRequestDatas();
-  //   console.log(pullRequestDatas);
+  // console.log(pullRequestDatas);
   for (const pullRequestData of pullRequestDatas) {
     reviewAndSend(pullRequestData);
   }
