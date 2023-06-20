@@ -18,18 +18,21 @@ node main.js
 
 ## Sequence Diagram
 
-```plantuml
-@startuml
+```mermaid
+sequenceDiagram
+    participant backend
+    participant GitHub
+    participant ChatGPT
+    participant frontend
+    
+    backend ->> GitHub: Fetch pull request details
+    GitHub -->> backend: Return pull request details
+    backend ->> GitHub: Fetch associated issues for the pull request
+    GitHub -->> backend: Return associated issues
+    backend ->> ChatGPT: Provide GitHub information and request AI for review
+    ChatGPT -->> backend: Return AI review results
+    backend ->> frontend: Return review results
 
-backend -> GitHub: Fetch pull request details
-GitHub -> backend: Return pull request details
-backend -> GitHub: Fetch associated issues for the pull request
-GitHub -> backend: Return associated issues
-backend -> ChatGPT: Provide GitHub information and request AI for review
-ChatGPT -> backend: Return AI review results
-backend -> frontend: Return review results
-
-@enduml
 ```
 
 ## Files
