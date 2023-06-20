@@ -22,12 +22,15 @@ async function reviewAndSend(pullRequestData) {
 }
 
 async function processPullRequests() {
+  console.log("processPullRequests");
   const pullRequestDatas = await getNewPullRequestDatas();
-  //   console.log(pullRequestDatas);
+  console.log("getNewPullRequestDatas");
+  // console.log(pullRequestDatas);
   for (const pullRequestData of pullRequestDatas) {
-    reviewAndSend(pullRequestData);
+    await reviewAndSend(pullRequestData);
   }
-}
 
+  setTimeout(processPullRequests, 5000);
+}
 // 5秒ごとにPull Requestのデータを取得し、それぞれに対してレビューと送信の処理を行います。
-setInterval(processPullRequests, 5000);
+processPullRequests();
