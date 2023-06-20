@@ -74,7 +74,8 @@ async function functionCallWithOpenAI(messages) {
           properties: {
             reply: {
               type: "string",
-              description: "AI Review. about 300 words.",
+              description:
+                "AI Review(about 300 words). First of all, give your opinion of the pull request as a whole. Be as complimentary as possible. In the paragraphs that follow, briefly discuss each metric.",
             },
             Comprehensiveness: {
               type: "integer",
@@ -211,19 +212,23 @@ async function autoReview(pullRequestData) {
     },
   ];
   response = await chatWithOpenAI(messages);
-  console.log(response.choices[0]);
   messages.push({
     role: "assistant",
     content: response.choices[0].message.content,
   });
   while (response.choices[0].finish_reason !== "stop") {
     response = await chatWithOpenAI(messages);
-    console.log(response.choices[0]);
     messages.push({
       role: "assistant",
       content: response.choices[0].message.content,
     });
   }
+  const overAll = messages
+    .slice(2)
+    .map((message) => message.content)
+    .join("");
+  console.log(overAll);
+
   response = await functionCallWithOpenAI(messages);
   review = response.choices[0].message.function_call.arguments;
   review = JSON.parse(review);
@@ -253,6 +258,7 @@ async function autoReview(pullRequestData) {
     title: pullRequestData.title,
     message: pullRequestData.body,
     reply: review.reply,
+    overAll: overAll,
     accuracy: temporaryAccuracy,
     approval: true,
     time: new Date().toISOString(), // 現在のISO8601形式の日時
