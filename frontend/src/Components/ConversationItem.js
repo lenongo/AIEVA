@@ -38,10 +38,17 @@ const ConversationItem = ({ userIcon, username, message, approval, time }) => {
               {approval}
             </Text>
           </>
-        ) : (
+        ) : approval === 'Reject' ? (
           <>
             <Image position={'relative'} top={'-39'} mr="5px" src={reject} />
             <Text position={'relative'} top={'-39'} color="#E21111">
+              {approval}
+            </Text>
+          </>
+        ) : (
+          <>
+            {' '}
+            <Text position={'relative'} top={'-39'} color="#FFFFFFF">
               {approval}
             </Text>
           </>

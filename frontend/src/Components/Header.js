@@ -85,7 +85,7 @@ const Header = () => {
           fontWeight="bold"
           _hover={{ color: '#000000' }}
         >
-          <Link to="/receipt">Receipt of ASTR</Link>
+          <Link to="/receipt">Review</Link>
         </Text>
         <Text
           ml="5vw"

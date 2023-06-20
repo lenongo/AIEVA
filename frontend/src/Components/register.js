@@ -123,10 +123,10 @@ const Register = () => {
           bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
         >
           <option fontWeight="bold" fontSize="40px" value="option1">
-            Shun Funaki
+            lenongo
           </option>
           <option fontWeight="bold" value="option2">
-            Haruki Nishio
+            herring101
           </option>
           <option fontWeight="bold" value="option3">
             Kakeru Hirayama

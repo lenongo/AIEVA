@@ -11,15 +11,15 @@ const Detail = () => {
     code: 'プルリクで変更されているコード',
     reply: 'AIからのリプライ内容',
     accuracy: {
-      Comprehensiveness: 10,
-      'Code Quality': 7,
-      Testing: 2,
-      Documentation: 4,
-      Performance: 8,
-      Security: 10,
-      'Error Handling': 6,
-      'Size of the Pull Request': 7,
-      Average: 7.2,
+      Comprehensiveness: 8,
+      CodeQuality: 8,
+      Testing: 6,
+      Documentation: 6,
+      Performance: 9,
+      Security: 9,
+      ErrorHandling: 7,
+      Size: 9,
+      Average: 7.75,
     },
     approval: false,
     time: 'Timeスタンプ',
@@ -84,24 +84,22 @@ const Detail = () => {
                 bg="rgba(255, 255, 255, 0.5)" // Set the background color with alpha transparency
               >
                 <Text p="20px">
-                  There are no tests included in the pull request. It would be
-                  beneficial to have tests that cover the functionality of
-                  setting the background image and ensure that it works as
-                  expected. <br /> <br />
-                  The pull request is focused on setting the background image,
-                  but it also includes some additional changes related to
-                  dependency updates. While these changes may be related to the
-                  overall improvement of the system, it would have been more
-                  focused to separate them into different pull requests.
-                  Overall, the pull request addresses the main issue of setting
-                  the background image but lacks comprehensive testing and
-                  documentation updates.
+                  'Great job on addressing the issue with setting a background
+                  image! The code adheres to coding standards and style guides,
+                  making it clear and maintainable. However, there are a few
+                  areas that could be improved. It would be beneficial to add
+                  tests specifically for the changes related to setting the
+                  background image and adjust the documentation to reflect the
+                  changes made. <br />
                   <br />
-                  <br /> It would be beneficial to include tests to verify the
-                  functionality and provide clear and helpful documentation
-                  updates. Additionally, the code could benefit from additional
-                  error handling and more comments to improve clarity and
-                  maintainability.
+                  Additionally, it would be helpful to handle any potential
+                  errors that may occur when loading the image file. Overall,
+                  the pull request is small and focused, which is great. Keep up
+                  the good work!', 'Overall, the pull request addresses the main
+                  issue of setting a background image, but there is room for
+                  improvement in terms of testing, documentation, and error
+                  handling. The suggestion in the comment regarding the choice
+                  of image for the background could also be addressed.'
                 </Text>
               </Box>
             </Box>

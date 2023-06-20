@@ -1,5 +1,7 @@
 import { Box, Button, Heading, Text, Center } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
 import ConversationItem from './ConversationItem';
 import Receive from './Receive';
 import Header from './Header';
@@ -8,41 +10,70 @@ import Register from './register';
 import Detail from './Detail';
 
 const Top = () => {
+  const [data, setData] = useState('');
+
+  const sendData = async () => {
+    try {
+      const response = await axios.post('/api/data', {
+        data: 'Hello from React',
+      });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const conversations = [
     {
       id: 1,
-      userIcon: 'user1.png',
-      username: 'John',
-      message: 'Hello, how are you?',
-      approval: 'Approve',
-      time: '2021/10/10 10:00',
+      userIcon: 'https://avatars.githubusercontent.com/u/72214074?v=4',
+      username: 'lenongo',
+      message: 'New Create Game using javascript',
+      approval: 'Progress',
+      time: '2023-06-20 21:40',
     },
     {
       id: 2,
-      userIcon: 'user2.png',
-      username: 'Jane',
-      message: "I'm doing well, thank you!",
+      userIcon: 'https://avatars.githubusercontent.com/u/72214074?v=4',
+      username: 'lenongo',
+      message: 'Create Game using javascript',
       approval: 'Reject',
-      time: '2021/10/10 10:00',
+      time: '2023-06-20 15:40',
+    },
+    {
+      id: 3,
+      userIcon: 'https://avatars.githubusercontent.com/u/81513223?v=4',
+      username: 'herring101',
+      message: 'A logo was set as the background image.',
+      approval: 'Approve',
+      time: '2023-06-20 12:31',
     },
     // 他の会話データを追加
   ];
   const history = [
     {
       id: 1,
-      userIcon: 'user1.png',
-      username: 'John',
-      coin: '100',
-      approval: 'Approve',
-      time: '2021/10/10 10:00',
+      userIcon: 'https://avatars.githubusercontent.com/u/72214074?v=4',
+      username: 'lenongo',
+      coin: '1',
+      approval: 'Progress',
+      time: '2023-06-20 21:40',
     },
     {
       id: 2,
-      userIcon: 'user2.png',
-      username: 'Jane',
-      coin: '200',
+      userIcon: 'https://avatars.githubusercontent.com/u/72214074?v=4',
+      username: 'lenongo',
+      coin: '1',
       approval: 'Reject',
-      time: '2021/10/10 10:00',
+      time: '2023-06-20 21:40',
+    },
+    {
+      id: 3,
+      userIcon: 'https://avatars.githubusercontent.com/u/81513223?v=4',
+      username: 'herring101',
+      coin: '5',
+      approval: 'Approve',
+      time: '2023-06-20 12:31',
     },
   ];
   return (
@@ -93,6 +124,7 @@ const Top = () => {
                     Invite Team Member
                   </Button>
                 </Center>
+                <Button onClick={sendData}>Send Data</Button>
               </>
             }
           />
@@ -136,7 +168,7 @@ const Top = () => {
                   ml="5vw"
                   mt={'3vh'}
                 >
-                  Receipt ASTR
+                  Review
                 </Text>
                 {history.map(history => (
                   <Receipt
